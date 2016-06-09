@@ -1,0 +1,40 @@
+<!doctype html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.15.2/codemirror.min.css">
+        <style>
+            .code {
+                width: 500px;
+                height: 300px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Settings</h1>
+        <div class='code'></div>
+        <button onclick='save()'>OK</button>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.15.2/codemirror.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.15.2/mode/javascript/javascript.min.js"></script>
+        <script>
+            function save () {
+                chrome.storage.local.set({'injsect-code': codeEditor.getValue()}, function() {
+                    message('Settings saved');
+                });
+            }
+
+            ;(function() {
+                chrome.storage.local.get('injsect-code', function (items) {
+                  const code = items['injsect-code']
+                  const element = document.querySelector('.code')
+                  window.codeEditor = CodeMirror(element, {
+                    mode:  "javascript",
+                    value: code || '',
+                    tabSize: 2,
+                    lineNumbers: true
+                  })
+                })
+            })();
+        </script>
+    </body>
+</html>
