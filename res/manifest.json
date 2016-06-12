@@ -18,6 +18,7 @@
     "activeTab",
     "webRequest",
     "storage",
+    "notifications",
     "*://*/"
   ]
 }
