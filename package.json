@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "test": "standard --verbose | snazzy",
-    "build": "mkdir -p ./dist && browserify -t [ babelify ] main.js -o dist/bundle.js"
+    "build": "npm run build-react && npm run build-extension",
+    "build-react": "mkdir -p ./dist && browserify -t [ babelify ] main.js -o dist/bundle.js",
+    "build-extension": "mkdir -p ./dist && browserify -t [ babelify ] inject.js -o dist/inject.js && npm run copy-res",
+    "copy-res": "cp icon.png  manifest.json  popup.html dist/"
   },
   "dependencies": {
     "babel-preset-es2015": "^6.9.0",
