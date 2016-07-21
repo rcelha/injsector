@@ -3,6 +3,7 @@
 const React = require('react')
 import {CodeBlock} from './code-block'
 import {save, load} from './storage'
+import {showInfo} from './notify'
 import { v4 } from 'uuid'
 
 export class CodeList extends React.Component {
@@ -27,7 +28,7 @@ export class CodeList extends React.Component {
     data[id] = item
     this.setState({data})
     save(data)
-      .then(() => alert('saved'))
+      .then(() => showInfo('Snippet saved'))
       .catch(() => alert('fail'))
   }
 
@@ -37,7 +38,7 @@ export class CodeList extends React.Component {
     delete data[id]
     this.setState({data})
     save(data)
-      .then(() => alert('saved'))
+      .then(() => showInfo('Snippet removed'))
       .catch(() => alert('fail'))
   }
 
@@ -60,11 +61,17 @@ export class CodeList extends React.Component {
         key={id_} />
 
       blocks.push(block)
+      blocks.push(<hr key={'hr-' + id_} />)
     }
 
-    return <div id='codeList'>
-      {blocks}
-      <button onClick={this.addItem.bind(this)}>+</button>
-    </div>
+    return (
+      <div id='codeList'>
+        <hr />
+        {blocks}
+        <div className='btn-group' role='group'>
+          <button onClick={this.addItem.bind(this)} className='btn'>Add snippet</button>
+        </div>
+      </div>
+    )
   }
 }
