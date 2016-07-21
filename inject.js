@@ -1,4 +1,6 @@
-/* global chrome XMLHttpRequest */
+/* global XMLHttpRequest */
+
+import {load} from './app/components/storage'
 
 function loadScript (url, cb, err) {
   const request = new XMLHttpRequest()
@@ -17,21 +19,23 @@ function loadScript (url, cb, err) {
   request.send()
 }
 
-chrome.storage.local.get('injsect-urls', function (items) {
-  const code = items['injsect-urls']
-  console.log(code)
-  for (let k in code) {
-    const block = code[k]
-    loadScript(block.url,
-      (ret) => {
-        const scriptTag = document.createElement('script')
-        scriptTag.text = ret
-        scriptTag.async = false
-        document.documentElement.appendChild(scriptTag)
-      },
-      (err) => {
-        console.log('Injsect error', err)
+function insertCode (code) {
+  const scriptTag = document.createElement('script')
+  scriptTag.text = code
+  scriptTag.async = false
+  document.documentElement.appendChild(scriptTag)
+}
+
+load('injsect-urls')
+  .then(items => {
+    for (let k in items) {
+      const block = items[k]
+      const code = block.code.trim()
+      const url = block.url.trim()
+      if (code.length > 0) {
+        insertCode(code)
+      } else {
+        loadScript(url, insertCode, err => console.log('Injsect error', err))
       }
-    )
-  }
-})
+    }
+  })
