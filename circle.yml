@@ -1,0 +1,6 @@
+deployment:
+  release:
+  branch: master
+  commands:
+	  — npm run pack
+	  — ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` dist/injsector.crx
