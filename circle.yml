@@ -1,6 +1,7 @@
 deployment:
   release:
-    branch: master
+    tag: /v[0-9]+(\.[0-9]+)*/
+    owner: rcelha
     commands:
       — npm run pack
       — ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` dist/injsector.crx
