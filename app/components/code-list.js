@@ -68,9 +68,7 @@ export class CodeList extends React.Component {
       <div id='codeList'>
         <hr />
         {blocks}
-        <div className='btn-group' role='group'>
-          <button onClick={this.addItem.bind(this)} className='btn'>Add snippet</button>
-        </div>
+        <button onClick={this.addItem.bind(this)} className='btn'>Add snippet</button>
       </div>
     )
   }

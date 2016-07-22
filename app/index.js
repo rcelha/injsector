@@ -1,15 +1,11 @@
 /* global window */
 const React = require('react')
-const jQuery = require('jquery-browserify')
-window.$ = jQuery
-window.Tether = require('tether')
-require('bootstrap')
 import {CodeList} from './components/code-list'
 
 export class App extends React.Component {
   render () {
     return (
-      <div className='container'>
+      <div>
         <header>
           <h1>{'In{JS}ector'}</h1>
         </header>
