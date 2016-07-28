@@ -38,9 +38,6 @@ export class CodeBlock extends React.Component {
     this.setState(s)
   }
 
-  changeIsCode (val) {
-  }
-
   render () {
     const codeComponent = (this.state.isCode === '0') ? (
       <input ref='url' type='url' className='form-control' placeholder='URL' onChange={this.onChangeField.bind(this, 'url')} value={this.state.url} />
@@ -59,8 +56,9 @@ export class CodeBlock extends React.Component {
                 <li><a onClick={() => this.setState({'isCode': '1'})} href='#'>Code</a></li>
               </ul>
             </div>
-            <button type='button' className='btn btn-default pull-right' onClick={this.onRemoveClick.bind(this)} aria-label='Remove'>
-              <span className='glyphicon glyphicon-remove-sign' aria-hidden='true'></span>
+
+            <button type='button' className='btn pull-right' data-toggle='modal' data-target={'#opt-modal-' + this.state.id}>
+              <span className='glyphicon glyphicon-option-vertical' aria-hidden='true'></span>
             </button>
           </div>
 
@@ -68,38 +66,51 @@ export class CodeBlock extends React.Component {
             {codeComponent}
           </div>
 
-          <div className='form-horizontal'>
-            <div className='form-group'>
-              <label htmlFor='urlMatch' className='col-sm-2  control-label'>Run only on domains that match:</label>
-              <div className='col-sm-10'>
-                <input ref='urlMatch'
-                  type='text'
-                  className='form-control'
-                  onChange={this.onChangeField.bind(this, 'urlMatch')} value={this.state.urlMatch} />
-              </div>
-            </div>
-            <p>Replace Element Options:</p>
-            <div className='form-group'>
-              <label htmlFor='replaceSrcMatch' className='col-sm-2 control-label'>SRC Pattern</label>
-              <div className='col-sm-10'>
-                <input ref='replaceSrcMatch'
-                  type='text'
-                  className='form-control'
-                  onChange={this.onChangeField.bind(this, 'replaceSrcMatch')} value={this.state.replaceSrcMatch} />
-              </div>
-            </div>
-            <div className='form-group'>
-              <label htmlFor='replaceTextMatch' className='col-sm-2 control-label'>Content Pattern</label>
-              <div className='col-sm-10'>
-                <input ref='replaceTextMatch'
-                  type='text'
-                  className='form-control'
-                  onChange={this.onChangeField.bind(this, 'replaceTextMatch')} value={this.state.replaceTextMatch} />
+          <div className='modal fade' ref='opt-modal' id={'opt-modal-' + this.state.id} tabIndex='-1' role='dialog' aria-labelledby='opt-modal'>
+            <div className='modal-dialog' role='document'>
+              <div className='modal-content'>
+                <div className='modal-body'>
+
+                  <fieldset>
+                    <h3>Load conditions</h3>
+                    <div className='form-group'>
+                      <label htmlFor='urlMatch' className='control-label'>Domains matching pattern:</label>
+                      <input ref='urlMatch'
+                        type='text'
+                        className='form-control'
+                        onChange={this.onChangeField.bind(this, 'urlMatch')} value={this.state.urlMatch} />
+                    </div>
+                  </fieldset>
+
+                  <fieldset>
+                    <h3>Replace Element Options:</h3>
+                    <div className='form-group'>
+                      <label htmlFor='replaceSrcMatch' className='control-label'>SRC Pattern</label>
+                      <input ref='replaceSrcMatch'
+                        type='text'
+                        className='form-control'
+                        onChange={this.onChangeField.bind(this, 'replaceSrcMatch')} value={this.state.replaceSrcMatch} />
+                    </div>
+                    <div className='form-group'>
+                      <label htmlFor='replaceTextMatch' className='control-label'>Content Pattern</label>
+                      <input ref='replaceTextMatch'
+                        type='text'
+                        className='form-control'
+                        onChange={this.onChangeField.bind(this, 'replaceTextMatch')} value={this.state.replaceTextMatch} />
+                    </div>
+                  </fieldset>
+
+                </div>
               </div>
             </div>
           </div>
+
           <div className='clearfix'>
-            <button className='btn btn-default pull-left' onClick={this.onCancelClick.bind(this)}>Reset</button>
+            <button type='button' className='btn btn-danger pull-left' onClick={this.onRemoveClick.bind(this)} aria-label='Remove'>
+              <span className='glyphicon glyphicon-remove-sign' aria-hidden='true'></span>
+            </button>
+
+            <button className='btn btn-default pull-right' onClick={this.onCancelClick.bind(this)}>Reset</button>
             <button className='btn btn-primary pull-right' onClick={this.onSaveClick.bind(this)}>Save</button>
           </div>
         </form>
