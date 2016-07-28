@@ -5,7 +5,7 @@ import {CodeList} from './components/code-list'
 export class App extends React.Component {
   render () {
     return (
-      <div>
+      <div className='container-fluid'>
         <header>
           <h1>{'In{JS}ector'}</h1>
         </header>
