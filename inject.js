@@ -19,7 +19,7 @@ function setUpReplace (block) {
             tag.setAttribute('src', '')
             const newScript = document.createElement('script')
             if (block.isCode === '1') {
-              newScript.innerText = block.code
+              newScript.innerHTML = block.code
             } else {
               newScript.setAttribute('src', block.url)
             }
