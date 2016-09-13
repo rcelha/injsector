@@ -10,4 +10,4 @@ deployment:
     commands:
       - npm run pack
       - cp ./dist/injsector.crx $CIRCLE_ARTIFACTS/
-      - ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` dist/injsector.crx
+      - ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --tags` $CIRCLE_ARTIFACTS/injsector.crx
