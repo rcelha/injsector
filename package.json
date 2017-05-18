@@ -16,6 +16,7 @@
     "babelify": "^7.3.0",
     "bluebird": "^3.4.0",
     "react": "^15.1.0",
+    "react-codemirror": "^1.0.0",
     "react-dom": "^15.1.0",
     "uuid": "^2.0.2"
   },

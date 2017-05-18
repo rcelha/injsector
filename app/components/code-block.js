@@ -1,4 +1,6 @@
 const React = require('react')
+const CodeMirror = require('react-codemirror')
+require('codemirror/mode/javascript/javascript')
 
 export class CodeBlock extends React.Component {
 
@@ -38,11 +40,22 @@ export class CodeBlock extends React.Component {
     this.setState(s)
   }
 
+  onChangeCode (value) {
+    const s = {}
+    s['code'] = value
+    this.setState(s)
+  }
+
   render () {
+    const options = {
+      lineNumbers: true,
+      mode: 'javascript'
+    }
+
     const codeComponent = (this.state.isCode === '0') ? (
       <input ref='url' type='url' className='form-control' placeholder='URL' onChange={this.onChangeField.bind(this, 'url')} value={this.state.url} />
     ) : (
-      <textarea ref='code' className='form-control' placeholder='Code' onChange={this.onChangeField.bind(this, 'code')} value={this.state.code}></textarea>
+      <CodeMirror ref='code' onChange={this.onChangeCode.bind(this)} value={this.state.code} options={options} />
     )
 
     return (
