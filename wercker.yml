@@ -1,8 +1,9 @@
 steps:
   - tcnksm/ghr@0.2.0
 
+box: node:6
+
 build:
-  box: node:6
   steps:
     - script:
         name: deps
