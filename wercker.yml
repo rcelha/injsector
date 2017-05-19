@@ -1,0 +1,11 @@
+box: node:6
+build:
+  steps:
+    - script:
+        name: deps
+        code: |
+          npm install
+    - script:
+        name: build
+        code: |
+          npm run build-extension
