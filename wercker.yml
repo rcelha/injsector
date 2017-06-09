@@ -10,7 +10,7 @@ build:
         code: npm install
     - script:
         name: build
-        code: npm run build-extension
+        code: npm run pack
 
 deploy:
   steps:
@@ -21,4 +21,4 @@ deploy:
       token: $GITHUB_TOKEN
       version: $APP_VERSION
       replace: true
-      input: dist
+      input: dist/injsector.crx
